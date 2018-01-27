@@ -1,0 +1,53 @@
+
+import os
+import re
+import sys
+from bs4  import BeautifulSoup
+import bs4
+import urllib.request
+import urllib.parse
+import html5lib
+import json
+
+html = urllib.request.urlopen("https://list.suning.com/0-431504-0-1-1.html")
+soup = BeautifulSoup(html, "lxml")  # 将html对象转化为BeautifulSoup对象
+s1 = soup.find('div', class_="res-info ").contents
+id=0
+for h in s1:
+    if type(h)==bs4.element.Tag:
+        nm = h.contents[0].p.em.contents
+        for pr in nm:
+            print(type(pr))
+            # print(nm)
+        # bh=h.div.attrs['data-sku']
+        # s2=h.find('ul',class_='ps-main').contents
+        # for h2 in s2:
+        #     if type(h2) == bs4.element.Tag:
+        #         # bh = h.a.img.attr['data-sku']
+        #         # id+=1
+        #         print(h.attrs)
+        # try:
+        #     f = urllib.request.urlopen('http://p.3.cn/prices/get?skuid=J_' + bh, timeout=5)
+        #     price = json.loads(f.read().decode())
+        #     pr=price[0]['p']
+        # except:
+        #     pass
+        # id+=1
+        # print(id,end='  ')
+        # print(bh,end='  ')
+        # print(nm,end='  ')
+        # print(pr,end='\n')
+
+# print(soup.find('li',class_='gl-item').div.contents[7].a.em.string)
+    # s2 = BeautifulSoup(h.encode(encoding="utf-8"), "lxml")
+    # print(s2.attrs)
+
+# h=soup.findall('li')
+# print(h)
+# price = json.loads(html.read())
+# print(price[0]['p'])
+
+#ulList = bsObj.findAll("em")  # 找到所有ul
+#for ul in ulList:
+#    print(ul)
+html.close()

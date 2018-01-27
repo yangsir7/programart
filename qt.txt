@@ -1,0 +1,67 @@
+import os
+import re
+import json
+import demjson
+# os.system("cat data.json")
+# {"age": 23, "name": "thinkgamer", "sex": "men"}
+def decodejson(h):
+    ls2=[]
+    # ls3=[]
+    ls1=h.split(':')
+    # print(ls1)
+    for em in ls1:
+        if re.search('\d{6}$', em):
+            if re.match('\d', em[-7]):
+                ls2.append(re.sub('\d{7}$', '"' + em[-7:] + '"', em))
+            else:
+                ls2.append(re.sub('\d{6}$', '"' + em[-6:] + '"', em))
+        else:
+            ls2.append(em)
+    ls2=':'.join(ls2)
+    return ls2
+with open("C:\\Users\\yangquan11\\Desktop\\json1.txt","rb") as fr:
+     #print(help(fr.read().decode()))
+     f=fr.read().decode('utf-8-sig')
+     # print(ls1)
+         # ls2.append(re.sub('\d{7}$', '"' + em[-7:] + '"', em))
+     # if fr.startswith(u'\ufeff'):
+     #    f = fr.encode('utf8')[3:].decode('utf8')
+     f1=decodejson(f)
+     data = json.loads(json.dumps(f1))
+     data2 = json.loads(data)
+     # print(type(data2['2942458'][0]))
+     hz1=[]
+     hz2=[]
+     n=0
+     for v in data2.values():
+         for lse in v:
+             for k2 in lse.keys():
+                # v2=lse.values()
+                n+=1
+                print(n,k2)
+                # v22=v2['name']
+                # hz1.append(k2)
+                # hz2.append(v22)
+         # print(hz1,hz2)
+     # data3=json.dumps(data2)
+     # print(data3)
+     # print(f1[241
+     # 00:24200])
+     # print(data2['name'])
+# h ='{2942458:[{ \
+# 	    "2942446":{\
+# 		"color":"2匹",\
+# 		"comments":"10137",\
+# 		"imageUrl":"jfs/t4558/211/292368936/57822/8199cce/58cd062eNc16dfcb1.jpg",\
+# 		"name":"格力（GREE）2匹 变频 静享 微联智能 冷暖圆柱柜机空调 KFR-50LW/(50555)FNhAd-A3（WIFI）",\
+# 		"subids":"2942446",\
+# 		"aos":[{"n":"圆柱式空调","v":"2491_87763"},\
+# 			{"n":"2匹","v":"256_87779"},\
+# 			{"n":"三级能效","v":"1200_77182"}],\
+# 		"xgzs":"7.4",\
+# 		"dist":1,\
+# 		"dist_ids":""}}]}'
+#         # print(data)
+# print(decodejson(h))
+
+

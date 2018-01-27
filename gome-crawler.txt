@@ -1,0 +1,48 @@
+from selenium import webdriver
+import time
+import csv
+
+driver=webdriver.Chrome()
+# driver.get('http://www.baidu.com/')
+# driver = webdriver.PhantomJS(executable_path="D:\Program Files\phantomjs\phantomjs.exe")
+# driver.implicitly_wait(10)
+# driver.set_window_size(1120, 550)
+driver.get("http://list.gome.com.cn/cat10000062-00-0-48-1-0-0-0-1-0-0-1-10-0-0-0-0-0.html?intcmp=list-9000000600-10")
+time.sleep(8)
+# driver.set_window_size(1120, 550)
+# sleep()
+# data = driver.title
+# print(data)
+# hz=[]
+elements = driver.find_elements_by_xpath("//*[@id='product-box']/li")
+time.sleep(2)
+# print(elements)
+# target = driver.find_element_by_id("id_keypair")
+# driver.execute_script("arguments[0].scrollIntoView();", target)
+i=0
+# //*[@id='gm-9134570032-1123503012']/input//*[@id="gm-9134570032-1123503012"]/div/div/div/p/span[1]
+for  e in elements:
+    driver.execute_script("arguments[0].scrollIntoView();", e)
+    time.sleep(1)
+    e1 = e.find_element_by_xpath("./input").get_attribute('skuid')
+    e2 = e.find_element_by_xpath("./input").get_attribute('skuname') 
+    # target = driver.find_element_by_id("id_keypair")
+    i+=1
+    # driver2 = webdriver.PhantomJS(executable_path="D:\Program Files\phantomjs\phantomjs.exe")
+    e3 = driver.find_element_by_xpath("//*[@id='product-box']/li["+str(i)+"]/div/div/div/p/span[1]").get_attribute('innerHTML')
+    time.sleep(1)
+#     # e1=e.find_element_by_xpath("./div").get_attribute('data-sku')
+#     # [ @class ='p-name p-name-type3']
+#     # e2=e.find_element_by_xpath("./div/div[4]/a/em").text
+#     # time.sleep(2)
+#     e3=e.find_element_by_xpath(".//*[@id='filter-results']/ul/li[1]/div/div/div/div[2]/p[1]/em/text()")
+#     time.sleep(2)
+    ee=[e1,e2,e3]
+    # hz.append(ee)
+    print(ee)
+    # i+=1
+    # if i==3:
+    #     # print(hz)
+    #     break
+# # driver.close()
+driver.quit()

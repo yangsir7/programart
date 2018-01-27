@@ -1,0 +1,50 @@
+from selenium import webdriver
+import time
+import csv
+
+driver = webdriver.PhantomJS(executable_path="D:\Program Files\phantomjs\phantomjs.exe")
+# driver.implicitly_wait(10)
+# driver.set_window_size(1120, 550)
+driver.get("http://list.jd.com/list.html?cat=737,794,870&page=2&delivery=1&sort=sort_rank_asc&trans=1&JL=6_0_0#J_main")
+time.sleep(60)
+# driver.set_window_size(1120, 550)
+# sleep()
+data = driver.title
+# hz=[]
+elements = driver.find_elements_by_xpath("//div[@id='plist']/ul/li")
+# print(elements)
+# i=0
+for  e in elements:
+    # e1 = e.get_attribute('class')
+    e1=e.find_element_by_xpath("./div").get_attribute('data-sku')
+    # [ @class ='p-name p-name-type3']
+    e2=e.find_element_by_xpath("./div/div[4]/a/em").text
+    # time.sleep(2)
+    e3=e.find_element_by_xpath("./div/div[@class='p-price']/strong[1]/i").text
+    time.sleep(2)
+    ee=[e1,e2,e3]
+    # hz.append(ee)
+    print(ee)
+    # i+=1
+    # if i==2:
+    #     print(hz)
+    #     break
+driver.close()
+# with open('C:\\Users\\yangquan11\\Desktop\\names.csv','wb') as fr:
+#     fieldnames =['id','name','price']
+#     writer=csv.DictWriter(fr,fieldnames=fieldnames)
+#     writer.writeheader()
+#     # dict1={}
+#     # for ls1 in hz:
+#         # dict1['id']=ls1[0]
+#         # dict1['name'] = ls1[1]
+#         # dict1['price'] = ls1[2]
+#     writer.writerows(hz)
+    # hz.append(ee)
+# element = driver.find_element_by_xpath("//div[@id='plist']/ul/li[1]/div/div[@class='p-price']/strong[1]/i")
+# element = driver.find_element_by_xpath("//div[@id='plist']")
+# element = driver.find_element_by_id("plist")
+# element = driver.find_element_by_name("passwd")
+# element = driver.find_elements_by_tag_name("head")
+# element = driver.find_element_by_xpath("/html/head/title")
+# print(element.text)
